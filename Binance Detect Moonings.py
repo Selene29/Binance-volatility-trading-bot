@@ -54,7 +54,8 @@ else:
 
 
 # select what to pair the coins to and pull all coins paired with PAIR_WITH
-PAIR_WITH = 'USDT'
+#PAIR_WITH = 'USDT'
+PAIR_WITH = 'EUR'
 
 # Define the size of each trade, by default in USDT
 QUANTITY = 100
@@ -65,10 +66,10 @@ QUANTITY = 100
 FIATS = ['EURUSDT', 'GBPUSDT', 'JPYUSDT', 'USDUSDT', 'DOWN', 'UP']
 
 # the amount of time in MINUTES to calculate the difference from the current price
-TIME_DIFFERENCE = 5
+TIME_DIFFERENCE = 0.1
 
 # the difference in % between the first and second checks for the price, by default set at 10 minutes apart.
-CHANGE_IN_PRICE = 3
+CHANGE_IN_PRICE = 0.3
 
 # define in % when to sell a coin that's not making a profit
 STOP_LOSS = 3
@@ -137,7 +138,8 @@ def wait_for_price():
     initial_price = get_price()
 
     while initial_price['BNB' + PAIR_WITH]['time'] > datetime.now() - timedelta(minutes=TIME_DIFFERENCE):
-        print(f'not enough time has passed yet...')
+        print(f'Not enough time has passed yet, will wait {TIME_DIFFERENCE} {"minutes" if TIME_DIFFERENCE > 1 else "minute"}...')
+        print(TIME_DIFFERENCE)
 
         # let's wait here until the time passess...
         time.sleep(60*TIME_DIFFERENCE)
