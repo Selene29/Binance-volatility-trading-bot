@@ -2,3 +2,4 @@
 *_coins_bought.json
 !.env.example
 *.env
+.vscode/launch.json
