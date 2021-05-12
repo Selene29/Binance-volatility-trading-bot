@@ -283,6 +283,10 @@ def sell_coins():
         TP = float(coins_bought[coin]['bought_at']) + (float(coins_bought[coin]['bought_at']) * TAKE_PROFIT) / 100
         SL = float(coins_bought[coin]['bought_at']) - (float(coins_bought[coin]['bought_at']) * STOP_LOSS) / 100
 
+        LastPrice = float(last_price[coin]['price'])
+        BuyPrice = float(coins_bought[coin]['bought_at'])
+        PriceChange = float((LastPrice - BuyPrice) / BuyPrice * 100)
+
         # check that the price is above the take profit or below the stop loss
         if float(last_price[coin]['price']) > TP or float(last_price[coin]['price']) < SL:
             print(f"{'TP' if float(last_price[coin]['price']) > TP else 'SL'} reached, selling {coins_bought[coin]['volume']} {coin}...")
@@ -346,8 +350,9 @@ def remove_from_portfolio(coins_sold):
         json.dump(coins_bought, file, indent=4)
 
 def write_log(logline):
-   with open(LOG_FILE,'a+') as f:
-        f.write(logline + '\n')
+    timestamp = datetime.now().strftime("%d/%m %H:%M:%S")
+    with open(LOG_FILE,'a+') as f:
+        f.write(timestamp + ' ' + logline + '\n')
 
 
 if __name__ == '__main__':
