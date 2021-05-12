@@ -21,7 +21,7 @@ load_dotenv()
 # Switch between testnet and mainnet
 # Setting this to False will use REAL funds, use at your own risk
 # Define your API keys below in order for the toggle to work
-TESTNET = True
+TESTNET = False
 
 
 # Get binance key and secret for TEST and MAINNET
@@ -139,8 +139,12 @@ def wait_for_price():
     initial_price = get_price()
 
     while initial_price['BNB' + PAIR_WITH]['time'] > datetime.now() - timedelta(minutes=TIME_DIFFERENCE):
-        print(f'Not enough time has passed yet, will wait {TIME_DIFFERENCE} {"minutes" if TIME_DIFFERENCE > 1 else "minute"}...')
-        print(TIME_DIFFERENCE)
+        print('Not enough time has passed yet, will wait ', end = '')
+        
+        if TIME_DIFFERENCE > 1:
+            print(f'{TIME_DIFFERENCE} minutes...')
+        else:
+            print(f'{60*TIME_DIFFERENCE} seconds...')
 
         # let's wait here until the time passess...
         time.sleep(60*TIME_DIFFERENCE)
