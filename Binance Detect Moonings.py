@@ -285,7 +285,7 @@ def sell_coins():
 
         # check that the price is above the take profit or below the stop loss
         if float(last_price[coin]['price']) > TP or float(last_price[coin]['price']) < SL:
-            print(f"TP or SL reached, selling {coins_bought[coin]['volume']} {coin}...")
+            print(f"{'TP' if float(last_price[coin]['price']) > TP else 'SL'} reached, selling {coins_bought[coin]['volume']} {coin}...")
 
             if TESTNET :
                 # create test order before pushing an actual order
