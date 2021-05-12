@@ -127,6 +127,7 @@ def get_price():
             if PAIR_WITH in coin['symbol'] and all(item not in coin['symbol'] for item in FIATS):
                 initial_price[coin['symbol']] = { 'price': coin['price'], 'time': datetime.now()}
 
+    print(f'Bot received {len(prices)} tickers.')
     return initial_price
 
 
@@ -348,12 +349,15 @@ def write_log(logline):
 if __name__ == '__main__':
     print('Press Ctrl-Q to stop the script')
 
-    if not TESTNET:
-        print('WARNING: You are using the Mainnet and live funds. As a safety measure, the script will start executing in 30 seconds.')
-        time.sleep(30)
+    if TESTNET:
+        print('You are using Testnet.')
+    else:
+        print('WARNING: You are using the Mainnet and live funds.')
+        #time.sleep(30)
 
     for i in count():
-        orders, last_price, volume = buy()
-        update_portfolio(orders, last_price, volume)
-        coins_sold = sell_coins()
-        remove_from_portfolio(coins_sold)
+        convert_volume()
+        #orders, last_price, volume = buy()
+        #update_portfolio(orders, last_price, volume)
+        #coins_sold = sell_coins()
+        #remove_from_portfolio(coins_sold)
