@@ -317,7 +317,7 @@ def sell_coins():
                 if LOG_TRADES:
                     write_log(f"Sell: {coins_sold[coin]['volume']} {coin} - {BuyPrice} - {LastPrice} : {PriceChange:.2f}%")
         else:
-            print(f'TP or SL not yet reached, not selling {coin} for now...')
+            print(f'TP or SL not yet reached, not selling {coin} for now {BuyPrice} - {LastPrice} : {PriceChange:.2f}% ')
 
     return coins_sold
 
